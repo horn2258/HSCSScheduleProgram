@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset = "utf-8">
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <title>Testing anchor editing</title>
+    </head>
+</html>
+
+
+<body onload="changeHref()">  
+    <h1>Here is the Link</h1>
+
+    <div id="LinkDiv">
+    <!-- <a id="mainAnchor" href="https://google.com">LinkDescription</a> -->
+    </div>
+
+</body>
+
+
+<script>
+    function changeHref() {
+        //console.log(Date.now());
+        var newLink = "<a href=\"";
+        var fromTime = Math.floor(Date.now() / 1000);
+        var toTime = fromTime + (6 * 60 * 60); // 6 hours converted to seconds
+
+        newLink += "http://160.94.52.6/api/schedule/events/?to=";
+
+        newLink += toTime;
+        newLink += "&from="
+        newLink += fromTime;
+
+        newLink +="\">DYNAMIC LINK NAME</a>";
+
+        $("#LinkDiv").html(newLink);
+
+    }
+</script>
