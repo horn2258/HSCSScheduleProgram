@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset = "utf-8">
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <title>Testing anchor editing</title>
+    </head>
+</html>
+
+
+<body onload="changeHref()">  
+    <h1>Here is the Link</h1>
+
+    <div id="LinkDiv">
+    <!-- <a id="mainAnchor" href="https://google.com">LinkDescription</a> -->
+    </div>
+
+</body>
+
+
+<script>
+    function changeHref() {
+        //console.log(Date.now());
+        var fromTime = Math.floor(Date.now() / 1000);
+        var toTime = fromTime + (6 * 60 * 60); // 6 hours converted to seconds
+        
+        var url = "http://160.94.52.6/api/schedule/events/?to="
+        url += toTime;
+        url += "&from";
+        url += fromTime;
+        
+        var newLink = "<a href=\"";
+        newLink += url;
+        newLink +="\">DYNAMIC LINK NAME</a>";
+
+        $("#LinkDiv").html(newLink);
+
+        httpGet(url);
+
+    }
+
+    //this is also called when the page loads, and just prints to the console 
+    //whatever the page returns (should be json)
+    function httpGet(theUrl) {
+        let xmlHttpReq = new XMLHttpRequest();
+        xmlHttpReq.addEventListener("load", function() {
+            console.log(this.response);
+        });
+        xmlHttpReq.open("GET", theUrl, true); 
+        xmlHttpReq.responseType = "json";
+        xmlHttpReq.setRequestHeader("Access-Control-Allow-Origin", "*");
+        xmlHttpReq.send(null);
+        console.log("Request sent");
+        //return xmlHttpReq.responseText;
+    }
+
+</script>
